@@ -1,6 +1,6 @@
 # dynamic_form
 
-A new Flutter project.
+A new Flutter project to create Form from json. 
 
 ## Getting Started
 
