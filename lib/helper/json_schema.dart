@@ -333,7 +333,6 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Form(
       autovalidate: formGeneral['autoValidated'] ?? false,
       key: _formKey,

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:dynamic_form/DateTimePicker_Demo.dart';
+import 'package:dynamic_form/helper/DateTimePicker.dart';
 import 'package:flutter/material.dart';
 //import 'package:dynamic_form/helper/json_schema.dart';
 import 'package:dynamic_form/helper/json_to_form.dart';
@@ -50,7 +52,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  DateTime _fromDate = DateTime.now();
+  TimeOfDay _fromTime = const TimeOfDay(hour: 7, minute: 28);
+
+
   String form_send_email = json.encode([
     {'type': 'Input', 'title': 'Subject', 'placeholder': "Subject"},
     {'type': 'TareaText', 'title': 'Message', 'placeholder': "Content"},
@@ -65,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'title': 'TareaText test',
       'placeholder': "hola a todos"
     },
+    {'type': 'InputNumeric', 'title': 'Numeric only', 'placeholder': "Num",'validator':'digitsOnly'},
     {
       'type': 'RadioButton',
       'title': 'Radio Button tests',
@@ -107,10 +113,10 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       ]
     },
-     {
+    {
       'type': 'DropDownButton',
       'title': 'DropDownButton tests',
-      'value': 2,
+      'value': "2",
       'list': [
         {
           'titleitem': "product 1",
@@ -127,13 +133,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ]
     },
     {
-      'type':'Date',
-      'title': 'Date',
-      
-    }
+      'type': "DateTime",
+      'title': "Date Time",
+      'fromDate': "2020-02-25T14:44:28.534",
+      'fromTime': "1900-01-01T14:59:00.00",     
+    },
+     {
+      'type': "Date",
+      'title': "Date",
+      'fromDate': "2020-03-12T00:00:00.000",
+    },
   ]);
-  dynamic response;
 
+  dynamic response;
 
   @override
   Widget build(BuildContext context) {
@@ -147,9 +159,32 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: new SingleChildScrollView(
-        child: new Container(
+      body: SafeArea(
+        child: new SingleChildScrollView(
           child: new Column(children: <Widget>[
+            new FlatButton(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => DateAndTimePickerDemo())),
+              child: Text('Date Time Picker Demo'),
+              color: Colors.lightGreen,
+            ),
+
+            new DateTimePicker(
+              labelText: 'Tanggal',
+              selectedDate: _fromDate,
+              selectedTime: _fromTime,
+              selectDate: (DateTime date) {
+                setState(() {
+                  _fromDate = date;
+                });
+              },
+              selectTime: (TimeOfDay time) {
+                setState(() {
+                  _fromTime = time;
+                });
+              },
+            ),
+
             new CoreForm(
               form: form_send_email,
               onChanged: (dynamic response) {
