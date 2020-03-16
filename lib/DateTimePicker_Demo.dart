@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:dynamic_form/PhotoHero.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -39,8 +40,11 @@ class _InputDropdown extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(valueText, style: valueStyle),
-            Icon(Icons.arrow_drop_down,
-              color: Theme.of(context).brightness == Brightness.light ? Colors.grey.shade700 : Colors.white70,
+            Icon(
+              Icons.arrow_drop_down,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey.shade700
+                  : Colors.white70,
             ),
           ],
         ),
@@ -72,8 +76,7 @@ class _DateTimePicker extends StatelessWidget {
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != selectedDate)
-      selectDate(picked);
+    if (picked != null && picked != selectedDate) selectDate(picked);
   }
 
   Future<void> _selectTime(BuildContext context) async {
@@ -81,8 +84,7 @@ class _DateTimePicker extends StatelessWidget {
       context: context,
       initialTime: selectedTime,
     );
-    if (picked != null && picked != selectedTime)
-      selectTime(picked);
+    if (picked != null && picked != selectedTime) selectTime(picked);
   }
 
   @override
@@ -97,7 +99,9 @@ class _DateTimePicker extends StatelessWidget {
             labelText: labelText,
             valueText: DateFormat.yMMMd().format(selectedDate),
             valueStyle: valueStyle,
-            onPressed: () { _selectDate(context); },
+            onPressed: () {
+              _selectDate(context);
+            },
           ),
         ),
         const SizedBox(width: 12.0),
@@ -106,7 +110,9 @@ class _DateTimePicker extends StatelessWidget {
           child: _InputDropdown(
             valueText: selectedTime.format(context),
             valueStyle: valueStyle,
-            onPressed: () { _selectTime(context); },
+            onPressed: () {
+              _selectTime(context);
+            },
           ),
         ),
       ],
@@ -126,7 +132,12 @@ class _DateAndTimePickerDemoState extends State<DateAndTimePickerDemo> {
   TimeOfDay _fromTime = const TimeOfDay(hour: 7, minute: 28);
   DateTime _toDate = DateTime.now();
   TimeOfDay _toTime = const TimeOfDay(hour: 7, minute: 28);
-  final List<String> _allActivities = <String>['hiking', 'swimming', 'boating', 'fishing'];
+  final List<String> _allActivities = <String>[
+    'hiking',
+    'swimming',
+    'boating',
+    'fishing'
+  ];
   String _activity = 'fishing';
 
   @override
@@ -155,7 +166,10 @@ class _DateAndTimePickerDemoState extends State<DateAndTimePickerDemo> {
                 decoration: const InputDecoration(
                   labelText: 'Location',
                 ),
-                style: Theme.of(context).textTheme.headline.copyWith(fontSize: 20.0),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline
+                    .copyWith(fontSize: 20.0),
               ),
               _DateTimePicker(
                 labelText: 'From',
@@ -202,7 +216,8 @@ class _DateAndTimePickerDemoState extends State<DateAndTimePickerDemo> {
                       _activity = newValue;
                     });
                   },
-                  items: _allActivities.map<DropdownMenuItem<String>>((String value) {
+                  items: _allActivities
+                      .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -210,6 +225,10 @@ class _DateAndTimePickerDemoState extends State<DateAndTimePickerDemo> {
                   }).toList(),
                 ),
               ),
+              FlatButton(
+                  onPressed:()=> Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => HeroAnimation())),
+                  child: Text('Go To'))
             ],
           ),
         ),
@@ -217,5 +236,3 @@ class _DateAndTimePickerDemoState extends State<DateAndTimePickerDemo> {
     );
   }
 }
-
-
