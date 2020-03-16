@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter DynamicForm',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Dynamic Form'),
     );
   }
 }
@@ -135,13 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
     {
       'type': "DateTime",
       'title': "Date Time",
-      'fromDate': "2020-02-25T14:44:28.534",
-      'fromTime': "1900-01-01T14:59:00.00",     
+      'fromDate': DateTime.now().toIso8601String(),
+      'fromTime': DateTime.now().toIso8601String(),     
     },
      {
       'type': "Date",
       'title': "Date",
-      'fromDate': "2020-03-12T00:00:00.000",
+      'fromDate': DateTime.now().toIso8601String(),
     },
   ]);
 
