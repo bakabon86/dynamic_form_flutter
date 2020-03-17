@@ -192,6 +192,11 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             new RaisedButton(
+                child: new Text('Init'),
+                onPressed: () {
+                  print(this.form_send_email.toString());
+                }),
+            new RaisedButton(
                 child: new Text('Send'),
                 onPressed: () {
                   print(this.response.toString());
